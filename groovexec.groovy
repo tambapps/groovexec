@@ -12,14 +12,14 @@ import org.codehaus.groovy.tools.RootLoader
  */
 @OptionField(shortName = 'h', description = 'Show usage information')
 boolean help
-@OptionField(shortName = 'm', longName = 'main-class', description = 'The main class to use. Will try to guess it using the main attribute \'Main-Class\' from the jar\'s manifest if not provided')
+@OptionField(shortName = 'm', longName = 'main-class', description = '(Optional) The main class to use. Will try to guess it using the main attribute \'Main-Class\' from the jar\'s manifest if not provided')
 String mainClass
-@OptionField(shortName = 'D', longName = 'define', description = 'Define a system property (can be used many times)')
+@OptionField(shortName = 'D', longName = 'define', description = '(Optional) Define a system property (can be used many times)')
 String[] systemProperties
 @UnparsedField
 List<String> arguments
 
-CliBuilder cli = new CliBuilder(usage: 'groovexec.groovy [options] /path/to/jar [jar arguments]')
+CliBuilder cli = new CliBuilder(usage: 'groovexec [options] /path/to/jar [jar arguments]')
 
 /*
  * Options validation

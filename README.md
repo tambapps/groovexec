@@ -6,34 +6,47 @@ project. To execute a Groovy project (without an IDE), you would have to compile
 the jar, including all the Groovy dependencies (`groovy-all` or specific dependencies like `groovy-json`) and then launch `java -jar my-groovy-project.jar` but
 these jar can be quite heavy, as they include the whole Groovy SDK (at least the core of groovy).
 
-But if you installed Groovy on your computer, you already have the Groovy SDK. So why bother including it in your project's jar, make it heavier?
-Just build a jar containing only your compiled source code (and maybe some non-Groovy dependencies if any) and then execute it
+If you installed Groovy on your computer, you already have the Groovy SDK. So why bother including it in your project's jar, making it heavier?
+Just build a jar containing only your compiled source code (and your other non-Groovy dependencies if any) and then execute it
 using your installed Groovy SDK.
 
-This project helps you execute such jars, relying on the Groovy SDK installed in your computer.
+groovexec helps you execute such jars, relying on the Groovy SDK installed in your computer.
 
 
 ## How to use
 Here is the usage of the script
 ```text
-usage: groovexec.groovy [options] /path/to/jar [jar arguments]
- -D,--define <arg>       Define a system property (can be used many times)
- -h,--help               Show usage information
- -m,--main-class <arg>   The main class to use. Will try to guess it using
-                         the main attribute 'Main-Class' from the jar's
-                         manifest if not provided
+usage: groovexec [options] /path/to/jar [jar arguments]
+ -D,--define <arg>       (Optional) Define a system property (can be used
+                         many times)
+ -m,--main-class <arg>   (Optional) The main class to use. Will try to
+                         guess it using the main attribute 'Main-Class'
+                         from the jar's manifest if not provided
 ```
 
-If you are on Linux, you can install it with the `install.sh` script, it will put the script under the `/bin`
+If you are on Linux, you can install it with the `install.sh` script. It will put the script under the `/bin`
 directory of you groovy installation.
 
 ### Examples
 
 ```shell
-groovexec -D propert1=value1 -D property2=value2 -m my.groovy.project.Main jar-without-groovy-sdk.jar --my-project-arg 123
+groovexec -m jar-without-groovy-sdk.jar --my-project-arg 123
 ```
 
-Note that if you don't want to install the groovexec with my script, you could just call
+Or, if you want to explicitly specify the main class
+```shell
+# Specifying the main class and some java system properties
+groovexec -m my.groovy.project.Main jar-without-groovy-sdk.jar --my-project-arg 123
+```
+You can also define some Java System properties
+```shell
+# Specifying the main class and some java system properties
+groovexec -D propert1=value1 -D property2=value2 jar-without-groovy-sdk.jar --my-project-arg 123
+```
+
+Note that if you don't want to install the groovexec, you could just execute the script with `groovy`.
+
+Use
 ```shell
 groovy groovexec.groovy args...
 ```
@@ -44,8 +57,7 @@ groovexec args...
 ```
 
 ## Excluding Groovy SDK from your JARs
-
-In your groovy project, you would have to exclude groovy dependencies when building the jar.
+To make your JAR smaller, you would have to exclude Groovy SDK when building it. 
 
 ### In Gradle projects
 Use the `compileOnly` for all your Groovy dependencies (actually I haven't tested this as I am a Maven guy, so if it doesn't work please, notify me)
