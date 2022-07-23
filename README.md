@@ -1,6 +1,6 @@
 # groovexec: Execute JARs without Groovy SDK in them
 
-## Why this script
+## Why groovexec
 Groovy can be used for scripting, but sometimes you need more than one class, and then your script turns into a 
 project. To execute a Groovy project (without an IDE), you would have to compile it. You could compile
 the jar, including all the Groovy dependencies (`groovy-all` or specific dependencies like `groovy-json`) and then launch `java -jar my-groovy-project.jar` but
@@ -11,6 +11,37 @@ Just build a jar containing only your compiled source code (and maybe some non-G
 using your installed Groovy SDK.
 
 This project helps you execute such jars, relying on the Groovy SDK installed in your computer.
+
+
+## How to use
+Here is the usage of the script
+```text
+usage: groovexec.groovy [options] /path/to/jar [jar arguments]
+ -D,--define <arg>       Define a system property (can be used many times)
+ -h,--help               Show usage information
+ -m,--main-class <arg>   The main class to use. Will try to guess it using
+                         the main attribute 'Main-Class' from the jar's
+                         manifest if not provided
+```
+
+If you are on Linux, you can install it with the `install.sh` script, it will put the script under the `/bin`
+directory of you groovy installation.
+
+### Examples
+
+```shell
+groovexec -D propert1=value1 -D property2=value2 -m my.groovy.project.Main jar-without-groovy-sdk.jar --my-project-arg 123
+```
+
+Note that if you don't want to install the groovexec with my script, you could just call
+```shell
+groovy groovexec.groovy args...
+```
+
+Instead of
+```shell
+groovexec args...
+```
 
 ## Excluding Groovy SDK from your JARs
 
@@ -46,35 +77,4 @@ E.g.
     <scope>provided</scope>
   </dependency>
 </dependencies>
-```
-
-
-## How to use
-Here is the usage of the script
-```text
-usage: groovexec.groovy [options] /path/to/jar [jar arguments]
- -D,--define <arg>       Define a system property (can be used many times)
- -h,--help               Show usage information
- -m,--main-class <arg>   The main class to use. Will try to guess it using
-                         the main attribute 'Main-Class' from the jar's
-                         manifest if not provided
-```
-
-If you are on Linux, you can install it with the `install.sh` script, it will put the script under the `/bin`
-directory of you groovy installation.
-
-### Examples
-
-```shell
-groovexec -D propert1=value1 -D property2=value2 -m my.groovy.project.Main jar-without-groovy-sdk.jar --my-project-arg 123
-```
-
-Note that if you don't want to install the groovexec with my script, you could just call
-```shell
-groovy groovexec.groovy args...
-```
-
-Instead of 
-```shell
-groovexec args...
 ```
