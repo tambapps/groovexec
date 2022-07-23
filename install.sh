@@ -16,4 +16,5 @@ groovy groovexec.groovy "\$@"
 EOF
 
 chmod u+x $groovexecScript || exit 1
-echo "Successfully installed groovexec in $groovexecScript.\nRun 'groovexec -h' to test it works"
+echo "Successfully installed groovexec in $groovexecScript."
+echo "Run 'groovexec -h' to test it works"
