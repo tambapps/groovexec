@@ -60,19 +60,21 @@ usage: groovexec.groovy [options] /path/to/jar [jar arguments]
                          manifest if not provided
 ```
 
+If you are on Linux, you can install it with the `install.sh` script, it will put the script under the `/bin`
+directory of you groovy installation.
+
 ### Examples
 
 ```shell
-groovy groovexec.groovy -D propert1=value1 -D property2=value2 -m my.groovy.project.Main jar-without-groovy-sdk.jar --my-project-arg 123
+groovexec -D propert1=value1 -D property2=value2 -m my.groovy.project.Main jar-without-groovy-sdk.jar --my-project-arg 123
 ```
 
-Note that `groovexec.groovy` is an executable file. If you are on a Linux based Operating System,
-you could just call 
+Note that if you don't want to install the groovexec with my script, you could just call
 ```shell
-./groovexec.groovy args...
+groovy groovexec.groovy args...
 ```
 
 Instead of 
 ```shell
-groovy groovexec.groovy args...
+groovexec args...
 ```

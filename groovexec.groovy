@@ -1,4 +1,3 @@
-#!/bin/env groovy
 import groovy.cli.OptionField
 import groovy.cli.UnparsedField
 import groovy.cli.commons.CliBuilder
