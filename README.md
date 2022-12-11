@@ -29,8 +29,9 @@ directory of you groovy installation.
 
 ### Examples
 
+Will try to find a main class in the jar
 ```shell
-groovexec -m jar-without-groovy-sdk.jar --my-project-arg 123
+groovexec jar-without-groovy-sdk.jar --my-project-arg 123
 ```
 
 Or, if you want to explicitly specify the main class
